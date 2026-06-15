@@ -59,7 +59,4 @@ Pretrained and finetuned models in `outputs/`:
 - If you add large model files, consider using Git LFS.
 
 ## License & Contact
-Add a license if you plan to open-source. For questions, contact the author.
-
-----
-If you'd like, I can: add badges, include example screenshots, expand the Usage section with exact CLI flags, or create a `requirements-dev.txt` and a minimal `README` for the web UI. Which would you prefer next?
+----------------------------------------
