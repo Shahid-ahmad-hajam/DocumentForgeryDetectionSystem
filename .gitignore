@@ -1,0 +1,12 @@
+dataset/
+outputs/
+PREVIOUSoutputs/
+casia2/
+
+__pycache__/
+*.pyc
+
+venv/
+.venv/
+
+*.npz

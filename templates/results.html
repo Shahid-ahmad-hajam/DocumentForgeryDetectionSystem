@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Results - Image Forgery Detection</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="background-animation"></div>
+
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="8" fill="url(#gradient)" />
+            <path
+              d="M20 10L28 18L20 26L12 18L20 10Z"
+              fill="white"
+              opacity="0.9"
+            />
+            <path d="M20 14L24 18L20 22L16 18L20 14Z" fill="white" />
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#667eea" />
+                <stop offset="100%" stop-color="#764ba2" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Document Forgery Detection System</span>
+        </div>
+        <div class="nav-links">
+          <a href="/">Dashboard</a>
+          <a href="#" class="active">Results</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-container">
+      <div class="results-header">
+        <h1>Analysis Complete</h1>
+        <p>Detailed forensic analysis results</p>
+      </div>
+
+      <div class="results-container">
+        <div class="result-card verdict-card" id="verdictCard">
+          <div class="verdict-icon" id="verdictIcon">
+            <!-- Icon will be inserted by JS -->
+          </div>
+          <h2 class="verdict-label" id="verdictLabel">Analyzing...</h2>
+          <p class="verdict-description" id="verdictDescription">
+            Processing image data...
+          </p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
+            <h3>Confidence Score</h3>
+            <div class="metric-value" id="confidenceValue">--</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="confidenceProgress"></div>
+            </div>
+            <p class="metric-description">
+              Model's certainty in the prediction
+            </p>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3>Raw Probability</h3>
+            <div class="metric-value" id="rawScoreValue">--</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="rawScoreProgress"></div>
+            </div>
+            <p class="metric-description">Direct model output probability</p>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <h3>Accuracy Rate</h3>
+            <div class="metric-value" id="accuracyValue">--</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="accuracyProgress"></div>
+            </div>
+            <p class="metric-description">Overall detection accuracy</p>
+          </div>
+        </div>
+
+        <div class="analysis-details">
+          <h3>Technical Details</h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Classification:</span>
+              <span class="detail-value" id="classification">--</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Raw Score:</span>
+              <span class="detail-value" id="rawScoreDetail">--</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Confidence:</span>
+              <span class="detail-value" id="confidenceDetail">--</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Analysis Method:</span>
+              <span class="detail-value">ELA + CNN</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Model Version:</span>
+              <span class="detail-value">4.5-ELA</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Processing Time:</span>
+              <span class="detail-value" id="processingTime">--</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <a href="/" class="btn-primary">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            </svg>
+            Return to Dashboard
+          </a>
+          <button class="btn-secondary" onclick="window.print()">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6 9 6 2 18 2 18 9" />
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              />
+              <rect x="6" y="14" width="12" height="8" />
+            </svg>
+            Print Report
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2024 ForensicAI. Advanced Image Forensics Technology.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/results.js') }}"></script>
+  </body>
+</html>

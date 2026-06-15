@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Forgery Detection - Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="background-animation"></div>
+
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="8" fill="url(#gradient)" />
+            <path
+              d="M20 10L28 18L20 26L12 18L20 10Z"
+              fill="white"
+              opacity="0.9"
+            />
+            <path d="M20 14L24 18L20 22L16 18L20 14Z" fill="white" />
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#667eea" />
+                <stop offset="100%" stop-color="#764ba2" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span
+            ><img
+              src="{{ url_for('static', filename='images/logo.png') }}"
+              alt="ForensicAI Logo"
+              class="logo1"
+          /></span>
+        </div>
+        <div class="nav-links">
+          <a href="/" class="active">Dashboard</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('help') }}">Help</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-container">
+      <div class="hero-section">
+        <h1 class="hero-title">Document Forgery Detection System</h1>
+        <p class="hero-subtitle">
+          Advanced AI-powered analysis using Error Level Analysis (ELA) and Deep
+          Learning
+        </p>
+      </div>
+
+      <div class="upload-container">
+        <div class="upload-card">
+          <div class="upload-icon">
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+          </div>
+
+          <h2 class="upload-title">Upload Image for Analysis</h2>
+          <p class="upload-description">
+            Support for PNG, JPG, JPEG formats (Max 16MB)
+          </p>
+
+          <form id="uploadForm" enctype="multipart/form-data">
+            <input
+              type="file"
+              id="fileInput"
+              name="file"
+              accept=".png,.jpg,.jpeg"
+              hidden
+            />
+            <button
+              type="button"
+              class="btn-primary"
+              onclick="document.getElementById('fileInput').click()"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Choose File
+            </button>
+          </form>
+
+          <div id="filePreview" class="file-preview" style="display: none">
+            <img id="previewImage" src="" alt="Preview" />
+            <div class="preview-info">
+              <p id="fileName"></p>
+              <p id="fileSize"></p>
+            </div>
+            <button class="btn-secondary" id="analyzeBtn">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+              Analyze Image
+            </button>
+          </div>
+
+          <div
+            id="loadingSpinner"
+            class="loading-spinner"
+            style="display: none"
+          >
+            <div class="spinner"></div>
+            <p>Analyzing image with AI...</p>
+            <p class="loading-subtext">This may take a few moments</p>
+          </div>
+
+          <div
+            id="errorMessage"
+            class="error-message"
+            style="display: none"
+          ></div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon blue">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h3>ELA Technology</h3>
+            <p>
+              Error Level Analysis detects image manipulations by analyzing
+              compression artifacts
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon purple">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+              </svg>
+            </div>
+            <h3>Deep Learning CNN</h3>
+            <p>
+              Convolutional Neural Network trained on thousands of authentic and
+              forged images
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon green">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <h3>High Accuracy</h3>
+            <p>
+              State-of-the-art detection with detailed confidence scores and
+              analysis metrics
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2025 ForensicAI. Advanced Image Forensics Technology.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
